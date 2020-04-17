@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/tv_steps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="18sp" />
+
+
+    <Button
+        android:id="@+id/btn_stop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Touch to stop the Step Counter Service" />
+
+    <TextView
+        android:id="@+id/stepinfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Stopping the Step Counter Service can conserve battery life, the step counter will stay disabled until it is enabled again." />
+
+    <Button
+        android:id="@+id/sign_out"
+        android:layout_width="139dp"
+        android:layout_height="wrap_content"
+        android:text="Sign Out" />
+
+</LinearLayout>
