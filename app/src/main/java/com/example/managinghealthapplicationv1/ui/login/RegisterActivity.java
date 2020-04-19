@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.managinghealthapplicationv1.MainActivity;
 import com.example.managinghealthapplicationv1.R;
+import com.example.managinghealthapplicationv1.WalkingActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -64,7 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     Toast.makeText(RegisterActivity.this, "Failed Sign Up, please try again shortly", Toast.LENGTH_SHORT).show();
                             }
                             else {
-                                    startActivity(new Intent(RegisterActivity.this,MainActivity.class));
+                                    startActivity(new Intent(RegisterActivity.this, WalkingActivity.class));
                             }
                         }
                     });

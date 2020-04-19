@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.managinghealthapplicationv1.MainActivity;
 import com.example.managinghealthapplicationv1.R;
+import com.example.managinghealthapplicationv1.WalkingActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -45,8 +46,8 @@ public class LoginActivity extends AppCompatActivity {
                 FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
                 if(mFirebaseUser != null ){
                     Toast.makeText(LoginActivity.this, "Successfully logged in",Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(i);
+                    Intent login = new Intent(LoginActivity.this, WalkingActivity.class);
+                    startActivity(login);
                 }
                 else{
                     Toast.makeText(LoginActivity.this, "Please login to start MHA",Toast.LENGTH_SHORT).show();
@@ -78,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "Login error, please try again shortly", Toast.LENGTH_SHORT).show();
                             }
                             else{
-                                Intent intToMain = new Intent(LoginActivity.this,MainActivity.class);
+                                Intent intToMain = new Intent(LoginActivity.this, WalkingActivity.class);
                                 startActivity(intToMain);
                             }
                         }

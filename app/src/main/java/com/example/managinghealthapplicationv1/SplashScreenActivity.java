@@ -27,7 +27,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         if (user != null) {
             // User is signed in
             // Start home activity
-            startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
+            startActivity(new Intent(SplashScreenActivity.this, WalkingActivity.class));
         }
         else {
             EasySplashScreen configure = new EasySplashScreen(SplashScreenActivity.this)
@@ -35,6 +35,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                     .withBackgroundColor(Color.parseColor("#efefef"))
                     .withFooterText("© 2019 - 2020 MHA All Rights Reserved")
                     .withLogo(R.drawable.logo);
+
 
             View easySplashScreen = configure.create();
             setContentView(easySplashScreen);
