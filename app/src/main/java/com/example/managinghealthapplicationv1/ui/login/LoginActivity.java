@@ -10,8 +10,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.managinghealthapplicationv1.MainActivity;
 import com.example.managinghealthapplicationv1.R;
 import com.example.managinghealthapplicationv1.WalkingActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -94,10 +92,12 @@ public class LoginActivity extends AppCompatActivity {
         tvSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intSignUp = new Intent(LoginActivity.this, RegisterActivity.class);
+                Intent intSignUp = new Intent(LoginActivity.this, WalkingActivity.class);
                 startActivity(intSignUp);
             }
         });
+
+
     }
 
     @Override

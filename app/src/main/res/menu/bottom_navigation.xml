@@ -2,19 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/nav_steps"
+        android:id="@+id/nav_walk"
         android:icon="@drawable/ic_directions_walk_black_24dp"
-        android:title="Steps" />
-
+        android:title="Steps"/>
     <item
-        android:id="@+id/nav_calorie"
+        android:id="@+id/nav_calcounter"
         android:icon="@drawable/ic_free_breakfast_black_24dp"
-        android:title="Calorie Tracer" />
-
+        android:title="Diet Tracker"/>
     <item
-        android:id="@+id/nav_medID"
+        android:id="@+id/nav_medical"
         android:icon="@drawable/ic_accessibility_black_24dp"
-        android:title="Medical ID" />
-
+        android:title="Medical ID"/>
 
 </menu>

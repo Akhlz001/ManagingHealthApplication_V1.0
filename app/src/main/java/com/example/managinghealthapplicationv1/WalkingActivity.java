@@ -1,8 +1,10 @@
 package com.example.managinghealthapplicationv1;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
 import android.Manifest;
 import android.content.Context;
@@ -14,11 +16,11 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.managinghealthapplicationv1.ui.login.LoginActivity;
-import com.example.managinghealthapplicationv1.ui.login.RegisterActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class WalkingActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -34,7 +36,10 @@ public class WalkingActivity extends AppCompatActivity implements SensorEventLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_walking);
+        setContentView(R.layout.fragment_steps);
+
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        bottomNav.setOnNavigationItemSelectedListener(navListener);
 
         if(ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED){
@@ -47,6 +52,25 @@ public class WalkingActivity extends AppCompatActivity implements SensorEventLis
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem Item) {
+            Fragment selectedFragment = null;
+
+            switch (Item.getItemId()){
+                case R.id.nav_walk: selectedFragment = new StepsFragment();
+                break;
+                case R.id.nav_calcounter: selectedFragment = new CalcounterFragment();
+                break;
+                case R.id.nav_medical: selectedFragment = new MedicalIDFragment();
+                break;
+            }
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+
+            return true;
+        }
+    };
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
