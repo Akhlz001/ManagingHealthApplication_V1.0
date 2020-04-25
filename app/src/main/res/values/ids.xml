@@ -4,4 +4,5 @@
     <item name="btn_start" type="id" />
     <item name="btn_stop" type="id" />
     <item name="vunerable" type="id" />
+    <item name="nav_settings" type="id" />
 </resources>

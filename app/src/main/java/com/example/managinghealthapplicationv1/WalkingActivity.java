@@ -65,6 +65,8 @@ public class WalkingActivity extends AppCompatActivity implements SensorEventLis
                 break;
                 case R.id.nav_medical: selectedFragment = new MedicalIDFragment();
                 break;
+                case R.id.nav_settings: selectedFragment = new SettingsFragment();
+                break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
 
