@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.managinghealthapplicationv1.BottomNav;
 import com.example.managinghealthapplicationv1.MainActivity;
 import com.example.managinghealthapplicationv1.R;
 import com.example.managinghealthapplicationv1.WalkingActivity;
@@ -65,7 +66,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     Toast.makeText(RegisterActivity.this, "Failed Sign Up, please try again shortly", Toast.LENGTH_SHORT).show();
                             }
                             else {
-                                    startActivity(new Intent(RegisterActivity.this, WalkingActivity.class));
+                                    startActivity(new Intent(RegisterActivity.this, BottomNav.class));
                             }
                         }
                     });

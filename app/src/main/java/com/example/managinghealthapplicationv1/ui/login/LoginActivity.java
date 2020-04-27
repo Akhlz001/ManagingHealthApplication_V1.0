@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.managinghealthapplicationv1.BottomNav;
 import com.example.managinghealthapplicationv1.R;
 import com.example.managinghealthapplicationv1.WalkingActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -44,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
                 FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
                 if(mFirebaseUser != null ){
                     Toast.makeText(LoginActivity.this, "Successfully logged in",Toast.LENGTH_SHORT).show();
-                    Intent login = new Intent(LoginActivity.this, WalkingActivity.class);
+                    Intent login = new Intent(LoginActivity.this, BottomNav.class);
                     startActivity(login);
                 }
                 else{
@@ -92,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
         tvSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intSignUp = new Intent(LoginActivity.this, WalkingActivity.class);
+                Intent intSignUp = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intSignUp);
             }
         });
