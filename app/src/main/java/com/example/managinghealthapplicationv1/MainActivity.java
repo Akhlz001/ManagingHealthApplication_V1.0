@@ -7,11 +7,14 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.managinghealthapplicationv1.ui.login.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,14 +29,41 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private TextView TvSteps;
     private Button BtnStop;
     Button btnLogout;
-    FirebaseAuth mFirebaseAuth;
-    private FirebaseAuth.AuthStateListener mAuthStateListener;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_items, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.settings:
+                Intent setting = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(setting);
+                return true;
+            case R.id.about:
+                Intent info = new Intent(MainActivity.this, AboutActivity.class);
+                startActivity(info);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
 
     @SuppressLint("CutPasteId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.setTitle("Managing Health Application");
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         btnLogout = findViewById(R.id.sign_out);
 
@@ -45,6 +75,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 startActivity(intToSignIn);
             }
         });
+
+
 
         // Get an instance of the SensorManager
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);

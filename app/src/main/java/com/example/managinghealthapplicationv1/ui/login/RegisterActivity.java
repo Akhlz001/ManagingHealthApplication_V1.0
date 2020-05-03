@@ -12,9 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.managinghealthapplicationv1.BottomNav;
-import com.example.managinghealthapplicationv1.MainActivity;
 import com.example.managinghealthapplicationv1.R;
 import com.example.managinghealthapplicationv1.WalkingActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -49,30 +46,30 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = emailId.getText().toString();
                 String password = passwordId.getText().toString();
                 if (email.isEmpty()){
-                        emailId.setError("Please enter a valid email address");
-                        emailId.requestFocus();
+                    emailId.setError("Please enter a valid email address");
+                    emailId.requestFocus();
                 }
                 else if(password.isEmpty()){
-                        passwordId.setError("Please enter a password");
+                    passwordId.setError("Please enter a password");
                 }
                 else if(email.isEmpty() && password.isEmpty()){
-                        Toast.makeText(RegisterActivity.this, "Both fields are empty, please fill them in", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Both fields are empty, please fill them in", Toast.LENGTH_SHORT).show();
                 }
                 else if(!(email.isEmpty() && password.isEmpty())){
                     mFirebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(!task.isSuccessful()){
-                                    Toast.makeText(RegisterActivity.this, "Failed Sign Up, please try again shortly", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, "Failed Sign Up, please try again shortly", Toast.LENGTH_SHORT).show();
                             }
                             else {
-                                    startActivity(new Intent(RegisterActivity.this, BottomNav.class));
+                                startActivity(new Intent(RegisterActivity.this, WalkingActivity.class));
                             }
                         }
                     });
                 }
                 else{
-                        Toast.makeText(RegisterActivity.this, "An error occurred, please check your internet connection and try again", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "An error occurred, please check your internet connection and try again", Toast.LENGTH_SHORT).show();
                 }
             }
         });
