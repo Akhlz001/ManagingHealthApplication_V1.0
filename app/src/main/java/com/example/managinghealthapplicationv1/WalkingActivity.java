@@ -51,11 +51,11 @@ public class WalkingActivity extends AppCompatActivity implements SensorEventLis
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.settings:
-                Intent setting = new Intent(WalkingActivity.this, RegisterActivity.class);
+                Intent setting = new Intent(WalkingActivity.this, SettingsActivity.class);
                 startActivity(setting);
                 return true;
             case R.id.about:
-                Intent info = new Intent(WalkingActivity.this, LoginActivity.class);
+                Intent info = new Intent(WalkingActivity.this, AboutActivity.class);
                 startActivity(info);
                 return true;
             default:

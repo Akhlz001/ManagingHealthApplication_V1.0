@@ -11,6 +11,6 @@
         android:title="Diet Tracker"/>
     <item
         android:id="@+id/nav_medical"
-        android:icon="@drawable/ic_accessibility_black_24dp"
+        android:icon="@drawable/ic_icons8_medical_id_30"
         android:title="Medical ID"/>
 </menu>

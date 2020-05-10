@@ -18,6 +18,5 @@ public class SettingsActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_actionbarmenu, new CreateSettingPreferences()).commit();
         }
 
-
     }
 }
