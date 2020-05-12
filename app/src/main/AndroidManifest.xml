@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="LockedOrientationActivity">
-        <activity android:name=".MedicalActivity"
+        <activity android:name=".AddMedicalIDActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".WalkingActivity"
             android:screenOrientation="portrait"/>

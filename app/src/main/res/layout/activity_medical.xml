@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MedicalActivity" >
+    tools:context=".AddMedicalIDActivity" >
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
@@ -46,10 +46,24 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="20dp"
         android:ems="10"
+        android:hint="Height (cm)"
         android:inputType="textPersonName"
-        android:hint="Height"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/mage"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/mage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="20dp"
+        android:ems="10"
+        android:hint="Age"
+        android:inputType="textPersonName"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/mbloodtype"
         app:layout_constraintStart_toStartOf="parent" />
@@ -63,7 +77,7 @@
         android:layout_marginBottom="409dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="Weight"
+        android:hint="Weight (kg)"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -74,10 +88,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="20dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Blood Type"
+        android:inputType="textPersonName"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/mcondition"
         app:layout_constraintStart_toStartOf="parent" />
@@ -88,10 +102,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="20dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Medical Conditions"
+        android:inputType="textPersonName"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/mreaction"
         app:layout_constraintStart_toStartOf="parent" />
@@ -102,10 +116,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="20dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Allergies &amp; Reactions"
+        android:inputType="textPersonName"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/mmedication"
         app:layout_constraintStart_toStartOf="parent" />
@@ -116,10 +130,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
         android:layout_marginLeft="17dp"
-        android:layout_marginBottom="144dp"
+        android:layout_marginBottom="106dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Medications"
+        android:inputType="textPersonName"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -132,7 +146,7 @@
         android:layout_marginLeft="128dp"
         android:layout_marginEnd="127dp"
         android:layout_marginRight="127dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="30dp"
         android:text="Update Medical ID"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

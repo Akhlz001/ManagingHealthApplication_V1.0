@@ -24,7 +24,7 @@ public class CreateSettingPreferences extends PreferenceFragmentCompat implement
         switch (key) {
             case "ChangeMedical":
 
-                Intent myIntent = new Intent(CreateSettingPreferences.this.getActivity(), MedicalActivity.class);
+                Intent myIntent = new Intent(CreateSettingPreferences.this.getActivity(), AddMedicalIDActivity.class);
                 startActivity(myIntent);
                 return true;
 

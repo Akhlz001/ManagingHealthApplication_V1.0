@@ -13,10 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,7 +30,7 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MedicalActivity extends AppCompatActivity {
+public class AddMedicalIDActivity extends AppCompatActivity {
 
     private CircleImageView userProfileImage;
     private String currentUserID;
@@ -42,7 +40,7 @@ public class MedicalActivity extends AppCompatActivity {
     private StorageReference UserProfileImageRef;
     private ProgressDialog loadingBar;
     private Button SaveMedID;
-    private EditText mname, mweight, mheight, mbloodtype, mcondition, mreaction, mmedication;
+    private EditText mname, mage, mweight, mheight, mbloodtype, mcondition, mreaction, mmedication;
     private MedicalInfo medicalInfo;
 
     @Override
@@ -58,6 +56,7 @@ public class MedicalActivity extends AppCompatActivity {
         loadingBar = new ProgressDialog(this);
         SaveMedID = findViewById(R.id.updateid);
         mname = findViewById(R.id.mname);
+        mage = findViewById(R.id.mage);
         mweight = findViewById(R.id.mweight);
         mheight = findViewById(R.id.mheight);
         mbloodtype = findViewById(R.id.mbloodtype);
@@ -91,7 +90,7 @@ public class MedicalActivity extends AppCompatActivity {
                         }
                         else
                         {
-                            Toast.makeText(MedicalActivity.this, "Please set a profile image when filling in the Medical ID", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddMedicalIDActivity.this, "Please set a profile image when filling in the Medical ID", Toast.LENGTH_SHORT).show();
 
                             userProfileImage.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -115,10 +114,12 @@ public class MedicalActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                int age = Integer.parseInt(mage.getText().toString().trim());
                 Float height = Float.parseFloat(mheight.getText().toString().trim());
                 Float weight = Float.parseFloat(mweight.getText().toString().trim());
 
                 medicalInfo.setName(mname.getText().toString().trim());
+                medicalInfo.setAge(age);
                 medicalInfo.setBloodtype(mbloodtype.getText().toString().trim());
                 medicalInfo.setMedcondition(mcondition.getText().toString().trim());
                 medicalInfo.setMedreaction(mreaction.getText().toString().trim());
@@ -126,7 +127,7 @@ public class MedicalActivity extends AppCompatActivity {
                 medicalInfo.setHeight(height);
                 medicalInfo.setWeight(weight);
                 RootRef.child("Users").child(currentUserID).child("User Medical Profile").setValue(medicalInfo);
-                Toast.makeText(MedicalActivity.this, "Medical ID information successfully updated", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddMedicalIDActivity.this, "Medical ID information successfully updated", Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -170,7 +171,7 @@ public class MedicalActivity extends AppCompatActivity {
                         taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                Toast.makeText(MedicalActivity.this, "Medical ID Image Updated", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AddMedicalIDActivity.this, "Medical ID Image Updated", Toast.LENGTH_SHORT).show();
 
                                 final String downloadUrl = uri.toString();
 
@@ -182,7 +183,7 @@ public class MedicalActivity extends AppCompatActivity {
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception exception) {
-                                Toast.makeText(MedicalActivity.this, "An unknown error occurred, please check your internet connection", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AddMedicalIDActivity.this, "An unknown error occurred, please check your internet connection", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
                             }
 

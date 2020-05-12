@@ -94,7 +94,7 @@ public class WalkingActivity extends AppCompatActivity implements SensorEventLis
             requestPermissions(new String[]{Manifest.permission.ACTIVITY_RECOGNITION}, REQUEST_STEP_PERMISSION);
         }
 
-        tv_steps = (TextView) findViewById(R.id.tv_steps);
+        tv_steps = findViewById(R.id.tv_steps);
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 

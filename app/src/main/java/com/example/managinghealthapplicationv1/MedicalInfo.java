@@ -3,9 +3,18 @@ package com.example.managinghealthapplicationv1;
 public class MedicalInfo {
 
     private String Name, Bloodtype, Medcondition, Medreaction, Medmedication;
+    private Integer Age;
     private Float Height, Weight;
 
     public MedicalInfo() {
+    }
+
+    public Integer getAge() {
+        return Age;
+    }
+
+    public void setAge(Integer age) {
+        Age = age;
     }
 
     public String getName() {
