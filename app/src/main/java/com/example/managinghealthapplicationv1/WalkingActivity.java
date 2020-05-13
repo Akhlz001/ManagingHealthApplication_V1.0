@@ -4,10 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -24,8 +29,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.managinghealthapplicationv1.ui.login.LoginActivity;
-import com.example.managinghealthapplicationv1.ui.login.RegisterActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class WalkingActivity extends AppCompatActivity implements SensorEventListener {
@@ -50,6 +53,10 @@ public class WalkingActivity extends AppCompatActivity implements SensorEventLis
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.caloriecounter:
+                Intent calories = new Intent(WalkingActivity.this, CalorieCounter.class);
+                startActivity(calories);
+                return true;
             case R.id.settings:
                 Intent setting = new Intent(WalkingActivity.this, SettingsActivity.class);
                 startActivity(setting);
@@ -98,6 +105,8 @@ public class WalkingActivity extends AppCompatActivity implements SensorEventLis
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
+        addNotification();
+
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -107,8 +116,6 @@ public class WalkingActivity extends AppCompatActivity implements SensorEventLis
 
             switch (Item.getItemId()){
                 case R.id.nav_walk: selectedFragment = new StepsFragment();
-                    break;
-                case R.id.nav_calcounter: selectedFragment = new CalcounterFragment();
                     break;
                 case R.id.nav_medical: selectedFragment = new MedicalIDFragment();
                     break;
@@ -132,13 +139,14 @@ public class WalkingActivity extends AppCompatActivity implements SensorEventLis
             Toast.makeText(this, "Step sensor not found, starting legacy step counter", Toast.LENGTH_SHORT).show();
             Intent legacy = new Intent(WalkingActivity.this, MainActivity.class);
             startActivity(legacy);
+
         }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        running = false;
+        running = true;
         //sensorManager.unregisterListener(this); testing phase...
     }
 
@@ -146,7 +154,30 @@ public class WalkingActivity extends AppCompatActivity implements SensorEventLis
     public void onSensorChanged(SensorEvent event) {
         if(running){
             tv_steps.setText(String.valueOf(event.values[0]));
+
         }
+
+    }
+
+    private void addNotification()
+    {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel notificationChannel = new NotificationChannel("MHA", "Managing Health Application", NotificationManager.IMPORTANCE_DEFAULT);
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(notificationChannel);
+        }
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "MHA")
+                .setContentText("Managing Health Application")
+                .setSmallIcon(R.mipmap.ic_launcher_round)
+                .setAutoCancel(true)
+                .setContentText("Please leave MHA open in the background for an accurate step count reading")
+                .setStyle(new NotificationCompat.BigTextStyle());
+
+
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(this);
+        managerCompat.notify(999, builder.build());
     }
 
     @Override

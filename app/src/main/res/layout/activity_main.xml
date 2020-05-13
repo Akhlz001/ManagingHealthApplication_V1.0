@@ -40,9 +40,9 @@
         android:id="@+id/stepinfo"
         android:layout_width="374dp"
         android:layout_height="56dp"
-        android:layout_marginBottom="9dp"
+        android:layout_marginBottom="48dp"
         android:text="Stopping the Step Counter Service can conserve battery life, the step counter will stay disabled until it is enabled again."
-        app:layout_constraintBottom_toTopOf="@+id/sign_out"
+        app:layout_constraintBottom_toTopOf="@+id/start_calorie"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_stop" />
@@ -53,14 +53,27 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="136dp"
         android:layout_marginLeft="136dp"
-        android:layout_marginTop="60dp"
         android:layout_marginEnd="136dp"
         android:layout_marginRight="136dp"
-        android:layout_marginBottom="222dp"
+        android:layout_marginBottom="152dp"
         android:text="Sign Out"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stepinfo" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/start_calorie"
+        android:layout_width="167dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="136dp"
+        android:layout_marginLeft="136dp"
+        android:layout_marginEnd="136dp"
+        android:layout_marginRight="136dp"
+        android:layout_marginBottom="40dp"
+        android:text="Calorie Counter"
+        app:layout_constraintBottom_toTopOf="@+id/sign_out"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

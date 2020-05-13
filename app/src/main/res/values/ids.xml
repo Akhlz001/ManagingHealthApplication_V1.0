@@ -5,4 +5,5 @@
     <item name="btn_stop" type="id" />
     <item name="vunerable" type="id" />
     <item name="nav_settings" type="id" />
+    <item name="startcaloriecounter" type="id" />
 </resources>
