@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name='Managing Health Application V1'
+rootProject.name='Managing Health Application'
