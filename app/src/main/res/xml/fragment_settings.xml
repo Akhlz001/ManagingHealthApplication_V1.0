@@ -14,17 +14,6 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="Diet Tracker">
-
-        <CheckBoxPreference
-            android:key="UnregisterNotification"
-            android:title="Meal Suggestions"
-            android:summary="You will permanently stop receiving meal suggestions when unchecked"
-            android:defaultValue="false"/>
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
         android:title="Account">
 
         <Preference

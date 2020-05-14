@@ -2,6 +2,10 @@ package com.example.managinghealthapplicationv1;
 
 public class MedicalInfo {
 
+    //CLASS CREATED FOR USE IN 'AddMedicalIDActivity' TO ALLOW SIMPLER AND MORE ORGANISED CODE WHERE DATA IS SENT TO A FIREBASE REAL-TIME DATABASE
+
+    //variables declared
+
     private String Name, Bloodtype, Medcondition, Medreaction, Medmedication;
     private Integer Age;
     private Float Height, Weight;

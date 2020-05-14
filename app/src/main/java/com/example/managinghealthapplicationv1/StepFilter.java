@@ -1,5 +1,7 @@
 package com.example.managinghealthapplicationv1;
 
+//OPEN SOURCE CODE TAKEN FROM GITHUB TO ALLOW STEP DETECTION, USED IN 'Main Activity'
+
 public class StepFilter {
 
     private StepFilter() {

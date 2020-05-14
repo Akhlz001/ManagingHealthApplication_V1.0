@@ -1,3 +1,15 @@
+/**
+ * @author	Copyright (c) 2013 Jessica Yuen <jyuen@ualberta.ca>
+ *
+ * Permission to use, copy, modify, and distribute this software
+ * is granted, provided that the above copyright notice appear
+ * in all copies.
+ */
+
+/**
+ * First activity upon application load - displays the summaries of
+ * the calories log.
+ */
 package com.example.managinghealthapplicationv1;
 
 import java.util.Date;

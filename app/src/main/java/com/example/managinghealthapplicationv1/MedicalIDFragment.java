@@ -20,19 +20,22 @@ import com.squareup.picasso.Picasso;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class MedicalIDFragment extends Fragment {
+public class MedicalIDFragment extends Fragment { //Fragment class which can be opened via the bottom navigation bar found in the version of MHA which supports stepcounters
+
+    //variables created
+
     TextView a, b, c, d, e, f, g, h;
-    private CircleImageView userProfileImage;
-    DatabaseReference RootKey;
+    private CircleImageView userProfileImage; //Circle Image View called to show round user profile image
+    DatabaseReference RootKey; //Real-time Firebase database used to allow medical ID data to be retrieved
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_medicalid, container, false);
+        View view = inflater.inflate(R.layout.fragment_medicalid, container, false); //medical ID fragment is inflated in layout view
 
 
 
-
+        //Variables are declared, textviews are given layout file id's to allow data retrieval
 
         a = view.findViewById(R.id.rname);
         b = view.findViewById(R.id.rage);
@@ -43,19 +46,19 @@ public class MedicalIDFragment extends Fragment {
         g = view.findViewById(R.id.rreaction);
         h = view.findViewById(R.id.rmedication);
 
+        //notice in this class each id starts with 'r' which stands for retrieve, this stops confusion between both medical id methods
 
 
-
-        RootKey = FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("User Medical Profile");
+        RootKey = FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("User Medical Profile"); //Real-time firebase database directory is set
         RootKey .addValueEventListener(new ValueEventListener()
         {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) //data can now be retrieved from the if statement below
             {
                 if (dataSnapshot.exists())
                 {
 
-                    String name = dataSnapshot.child("name").getValue().toString();
+                    String name = dataSnapshot.child("name").getValue().toString(); //each value is taken from the realtime database and added to local variables in string format
                     String age = dataSnapshot.child("age").getValue().toString();
                     String height = dataSnapshot.child("height").getValue().toString();
                     String weight = dataSnapshot.child("weight").getValue().toString();
@@ -64,7 +67,7 @@ public class MedicalIDFragment extends Fragment {
                     String medreaction = dataSnapshot.child("medreaction").getValue().toString();
                     String medmedication = dataSnapshot.child("medmedication").getValue().toString();
 
-                    a.setText(name);
+                    a.setText(name); //now these string values can be set to the medical ID fragment displaying user information which is in the database, a very secure method as no local data is stored
                     b.setText(age);
                     c.setText(height);
                     d.setText(weight);
@@ -84,18 +87,18 @@ public class MedicalIDFragment extends Fragment {
             }
         });
 
-        userProfileImage = view.findViewById(R.id.medical_image);
+        userProfileImage = view.findViewById(R.id.medical_image); //Circle Image View is allocated medical ID fragment image so once image is retrieved it is shown
 
-        RootKey = FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        RootKey .addValueEventListener(new ValueEventListener()
+        RootKey = FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()); //Real-time firebase database directory is changed to allow image sourcing
+        RootKey .addValueEventListener(new ValueEventListener() //PLEASE NOTE IMAGE AND MEDICAL DATA ARE STORED UNDER THE CURRENT ID UNDER DIFFERENT SUB CATEGORIES MAKING IT HARDER TO INFILTRATE AND STEAL DATA
         {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
                 if (dataSnapshot.exists())
                 {
-                    String retrieveProfileImage = dataSnapshot.child("image").getValue().toString();
-                    Picasso.get().load(retrieveProfileImage).into(userProfileImage);
+                    String retrieveProfileImage = dataSnapshot.child("image").getValue().toString(); //image download link is saved to string format to allow input into Circle Image View
+                    Picasso.get().load(retrieveProfileImage).into(userProfileImage); //Image url loaded, image displayed...
                 }
             }
 
@@ -105,7 +108,7 @@ public class MedicalIDFragment extends Fragment {
 
             }
         });
-        return view;
+        return view; //View can now be returned, as all code has been passed and information displayed, without this the view will not pass!
     }
 
 }

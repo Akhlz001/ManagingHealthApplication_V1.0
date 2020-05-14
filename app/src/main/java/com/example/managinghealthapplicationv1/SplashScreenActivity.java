@@ -22,31 +22,32 @@ public class SplashScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //This code allows the activity to check if a user is signed into firebase or not
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
-            // User is signed in
-            // Start home activity
+            // If User is signed in start home activity
             startActivity(new Intent(SplashScreenActivity.this, WalkingActivity.class));
         }
         else {
+            // If user is not signed in start Splashscreen activity, showing MHA logo
             EasySplashScreen configure = new EasySplashScreen(SplashScreenActivity.this)
                     .withFullScreen()
                     .withBackgroundColor(Color.parseColor("#efefef"))
                     .withFooterText("© 2019 - 2020 MHA All Rights Reserved")
-                    .withLogo(R.drawable.logo);
+                    .withLogo(R.drawable.logo); //MHA Logo
 
 
             View easySplashScreen = configure.create();
             setContentView(easySplashScreen);
-            // No user is signed in
-            // start login activity
+            // After 2 seconds of the splashscreen displaying open the register activity allowing the user to sign up or sign in
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 public void run() {
                     startActivity(new Intent(SplashScreenActivity.this, RegisterActivity.class));
                 }
-            }, 3000);   //3 seconds
+            }, 2000);   //2 seconds
 
         }
 

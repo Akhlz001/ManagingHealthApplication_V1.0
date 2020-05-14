@@ -25,24 +25,27 @@ import com.example.managinghealthapplicationv1.ui.login.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener, StepAlert {
+
+    //all variables created
+
     private StepDetection simpleStepDetector;
-    private SensorManager sensorManager;
+    private SensorManager sensorManager; //accelerometer utilised
     private Sensor accel;
-    private static final String TEXT_NUM_STEPS = "Number of Steps: ";
+    private static final String TEXT_NUM_STEPS = "Number of Steps: "; //Text assigned to textview in linking xml
     private int numSteps;
     private TextView TvSteps;
     private Button BtnStop;
     Button btnLogout, btnCalorie;
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) { //inflates custom toolbar produced to allow user to choose options from toolbar menu
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_items, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) { //allows toolbar options to be utilised when a menu option is clicked an intent will be triggered
         switch (item.getItemId()) {
             case R.id.caloriecounter:
                 Intent calories = new Intent(MainActivity.this, CalorieCounter.class);
@@ -66,30 +69,33 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main); //set view to retrieve legacy step counter layout file
 
-        this.setTitle("Managing Health Application");
+        //variables declared in onCreate method
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        this.setTitle("Managing Health Application"); //Toolbar title adjusted
 
-        btnCalorie = findViewById(R.id.start_calorie);
+        Toolbar toolbar = findViewById(R.id.toolbar); //custom toolbar created to make menu option implementation easier
+        setSupportActionBar(toolbar); //toolbar initialised when activity is run
+
+        btnCalorie = findViewById(R.id.start_calorie); //Calorie counter starting class assigned to button
 
         btnCalorie.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { //Calorie counter class called from intent when 'Calorie Counter' button clicked:
                 Intent calories = new Intent(MainActivity.this, CalorieCounter.class);
                 startActivity(calories);
             }
         });
 
-        btnLogout = findViewById(R.id.sign_out);
+        btnLogout = findViewById(R.id.sign_out); //sign out
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                Intent intToSignIn = new Intent(MainActivity.this, LoginActivity.class);
+            public void onClick(View v) { //if clicked execute below commands:
+
+                FirebaseAuth.getInstance().signOut(); //Signs out user from the application officially
+                Intent intToSignIn = new Intent(MainActivity.this, LoginActivity.class); //takes user back to login activity, user successfully signed out
                 startActivity(intToSignIn);
             }
         });
@@ -100,31 +106,31 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         // Get an instance of the SensorManager
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         assert sensorManager != null;
-        accel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        simpleStepDetector = new StepDetection();
-        simpleStepDetector.registerListener(this);
+        accel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER); //accelerometer assigned to sensor manager
+        simpleStepDetector = new StepDetection(); //class called to incorporate step detection values
+        simpleStepDetector.registerListener(this); //step filter successfully assigned to count actual steps and not excessive movement of the phone
 
-        TvSteps = (TextView) findViewById(R.id.tv_steps);
-        BtnStop = (Button) findViewById(R.id.btn_stop);
-        BtnStop.setTag(1);
+        TvSteps = findViewById(R.id.tv_steps);
+        BtnStop = findViewById(R.id.btn_stop);
+        BtnStop.setTag(1); //tag set so that step counter service can be stopped if tag is changed, to save battery life...
 
 
                 numSteps = 0;
-                sensorManager.registerListener(MainActivity.this, accel, SensorManager.SENSOR_DELAY_FASTEST);
+                sensorManager.registerListener(MainActivity.this, accel, SensorManager.SENSOR_DELAY_FASTEST); //accelerometer successfully registered to start taking step count
 
 
 
         BtnStop.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { //if button is clicked tag is changed accordingly
 
                 int status = (Integer) v.getTag();
                 if (status == 1) {
-                    BtnStop.setText("Step Counter Service stopped, touch to start");
-                    sensorManager.unregisterListener(MainActivity.this);
+                    BtnStop.setText("Step Counter Service stopped, touch to start"); //button text changed and shown to the user
+                    sensorManager.unregisterListener(MainActivity.this); //accelerometer unregistered, step count stopped
                     v.setTag(0); //stop
-                } else {
+                } else { //opposite of what happened above happens here, sensor is registered again and tag is changed back to allow step count
                     BtnStop.setText("Step Counter Service active, touch to stop");
                     sensorManager.registerListener(MainActivity.this, accel, SensorManager.SENSOR_DELAY_FASTEST);
                     v.setTag(1); //start
@@ -134,29 +140,29 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
         });
 
-        addNotification();
+        addNotification(); //on starting the application the user is notified to keep the application running
 
     }
 
     private void addNotification()
     {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            NotificationChannel notificationChannel = new NotificationChannel("MHA", "Managing Health Application", NotificationManager.IMPORTANCE_DEFAULT);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){ //notification rules required for android 8 and above...
+            NotificationChannel notificationChannel = new NotificationChannel("MHA", "Managing Health Application", NotificationManager.IMPORTANCE_DEFAULT); //id and name of application specified so user knows what application sent the notification
 
             NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(notificationChannel);
+            manager.createNotificationChannel(notificationChannel); //notification channel created to allow notification to pass through
         }
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "MHA")
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "MHA") //notification is built here
                 .setContentText("Managing Health Application")
-                .setSmallIcon(R.mipmap.ic_launcher_round)
+                .setSmallIcon(R.mipmap.ic_launcher_round) //MHA stock image placed next to notification
                 .setAutoCancel(true)
                 .setContentText("Please leave MHA open in the background for an accurate step count reading")
-                .setStyle(new NotificationCompat.BigTextStyle());
+                .setStyle(new NotificationCompat.BigTextStyle()); //allows user to read full text shown, beneficial for smaller phones
 
 
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(this);
-        managerCompat.notify(999, builder.build());
+        managerCompat.notify(999, builder.build()); //notification is finally built and when method is called notification is sent to the user on creation of the activity
     }
 
     @Override
@@ -164,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     @Override
-    public void onSensorChanged(SensorEvent event) {
+    public void onSensorChanged(SensorEvent event) { //on accelerometer value changed the number of steps go up...
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             simpleStepDetector.updateAccel(
                     event.timestamp, event.values[0], event.values[1], event.values[2]);
@@ -173,8 +179,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void step(long timeNs) {
-        numSteps++;
-        TvSteps.setText(TEXT_NUM_STEPS + numSteps);
+        numSteps++; //step added on accelerometer movement which passes step detection filter
+        TvSteps.setText(TEXT_NUM_STEPS + numSteps); // step count number shown after string textview created in the variable at the top
     }
 
 }

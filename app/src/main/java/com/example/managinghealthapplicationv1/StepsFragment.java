@@ -13,7 +13,10 @@ public class StepsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_steps, container, false);
+        return inflater.inflate(R.layout.fragment_steps, container, false); //Step counter fragment called and inflated in layout view
+
+
+        //It's empty here! Step counter class stored in 'WalkingActivity' (this is the main activity for non legacy devices)...
 
     }
 }
