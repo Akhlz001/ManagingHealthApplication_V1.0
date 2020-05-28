@@ -1,5 +1,7 @@
 package com.example.managinghealthapplicationv1;
 
+// LEGACY STEP COUNTER //
+
 import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -35,27 +37,23 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private int numSteps;
     private TextView TvSteps;
     private Button BtnStop;
-    Button btnLogout, btnCalorie;
+    Button btnMedical, btnCalorie;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) { //inflates custom toolbar produced to allow user to choose options from toolbar menu
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_items, menu);
+        inflater.inflate(R.menu.menu_items_legacy, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) { //allows toolbar options to be utilised when a menu option is clicked an intent will be triggered
         switch (item.getItemId()) {
-            case R.id.caloriecounter:
-                Intent calories = new Intent(MainActivity.this, CalorieCounter.class);
-                startActivity(calories);
-                return true;
-            case R.id.settings:
+            case R.id.settingslegacy:
                 Intent setting = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(setting);
                 return true;
-            case R.id.about:
+            case R.id.aboutlegacy:
                 Intent info = new Intent(MainActivity.this, AboutActivity.class);
                 startActivity(info);
                 return true;
@@ -88,17 +86,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
         });
 
-        btnLogout = findViewById(R.id.sign_out); //sign out
+        btnMedical = findViewById(R.id.start_medical);
 
-        btnLogout.setOnClickListener(new View.OnClickListener() {
+        btnMedical.setOnClickListener(new View.OnClickListener() { //Medical ID class called from intent when 'Medical ID' button clicked:
             @Override
-            public void onClick(View v) { //if clicked execute below commands:
-
-                FirebaseAuth.getInstance().signOut(); //Signs out user from the application officially
-                Intent intToSignIn = new Intent(MainActivity.this, LoginActivity.class); //takes user back to login activity, user successfully signed out
-                startActivity(intToSignIn);
+            public void onClick(View v) {
+                Intent medical = new Intent(MainActivity.this, LegacyMedicalID.class);
+                startActivity(medical);
             }
         });
+
 
 
 

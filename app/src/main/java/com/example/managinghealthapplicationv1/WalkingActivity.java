@@ -1,5 +1,7 @@
 package com.example.managinghealthapplicationv1;
 
+// STEP COUNTER FOR NEWER PHONES //
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -141,9 +143,8 @@ public class WalkingActivity extends AppCompatActivity implements SensorEventLis
         }
         else{ //this is where the application can either switch to legacy mode or continue with the current activity, if no step counter is detected the legacy class is called and the user is limited to this...
             Toast.makeText(this, "Step sensor not found, starting legacy step counter", Toast.LENGTH_SHORT).show();
-            Intent legacy = new Intent(WalkingActivity.this, MainActivity.class);
-            startActivity(legacy);
-
+            Intent Legacy = new Intent(WalkingActivity.this, MainActivity.class);
+            startActivity(Legacy);
         }
     }
 
